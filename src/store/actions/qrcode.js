@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const qrcode = async () => {
+const getQRcode = async () => {
     const service = await axios({
         method: 'GET',
         baseURL: 'https://fadhil-auth.herokuapp.com',
@@ -10,6 +10,10 @@ const qrcode = async () => {
         }
     })
     return service;
+}
+
+const qrcode = {
+    getQRcode
 }
 
 export default qrcode;
