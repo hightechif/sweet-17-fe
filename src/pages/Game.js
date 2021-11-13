@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import  { useNavigate } from 'react-router-dom';
 import store from '../store';
-import { Button } from "@elevenia/master-ui/components/Atom";
 import styled from 'styled-components';
 
 const StyledGame = styled.div`
@@ -61,10 +60,10 @@ const Game = (props) => {
     return (
         <StyledGame>
             <p>Score: {score}</p>
-            <Button variant="secondary" onClick={() => scoreChangeHandler("increase", 5)}>Bola Ungu</Button>
-            <Button variant="secondary" onClick={() => scoreChangeHandler("increase", 1)}>Bola kuning</Button>
-            <Button variant="secondary" onClick={() => scoreChangeHandler("decrease", 2)}>Bola hitam</Button>
-            <Button variant="secondary" onClick={storeHandler}>SIMPAN</Button>
+            <button variant="secondary" onClick={() => scoreChangeHandler("increase", 5)}>Bola Ungu</button>
+            <button variant="secondary" onClick={() => scoreChangeHandler("increase", 1)}>Bola kuning</button>
+            <button variant="secondary" onClick={() => scoreChangeHandler("decrease", 2)}>Bola hitam</button>
+            <button variant="secondary" onClick={storeHandler}>SIMPAN</button>
         </StyledGame>
     )
 }

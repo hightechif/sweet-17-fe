@@ -1,5 +1,4 @@
 import Input from "./Input";
-import { Button } from "@elevenia/master-ui/components/Atom";
 
 const Form = (props) => {
     const {biodata, handleChange, handleSubmit, isRegistered, isLoginSuccess, isRegisterSuccess, isSubmit, errorMessage} = props;
@@ -12,10 +11,10 @@ const Form = (props) => {
             </div>
             <div className="flex flex-wrap -mx-3 mb-6">
                 {isRegistered && <div className="w-full px-3 mb-6 md:mb-0">
-                    <Button type="submit" className="w-full font-bold text-xl" variant="secondary">Login</Button>
+                    <button type="submit" className="w-full font-bold text-xl" variant="secondary">Login</button>
                 </div>}
                 {!isRegistered && <div className="w-full px-3 mb-6 md:mb-0">
-                    <Button type="submit" className="w-full font-bold text-xl" variant="secondary">Register</Button>
+                    <button type="submit" className="w-full font-bold text-xl" variant="secondary">Register</button>
                 </div>}
             </div>
             <div className="w-full -mx-3 mb-6 text-center">
