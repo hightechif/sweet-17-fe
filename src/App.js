@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import Router from './router';
+import { ThemeProvider } from 'styled-components'
+import IndomaretTheme from './assets/Theme';
 import './App.css';
+import './styles/css/Main.css';
+import styled from 'styled-components';
+require('dotenv').config();
+
+const StyledFont = styled.div`
+  font-family: "Open Sans";
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={IndomaretTheme} >
+      <StyledFont>
+        <Router />
+      </StyledFont>
+    </ThemeProvider>
+  )
 }
 
 export default App;
