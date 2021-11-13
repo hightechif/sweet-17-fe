@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import  { useNavigate } from 'react-router-dom';
 import store from '../store';
 import { Button } from "@elevenia/master-ui/components/Atom";
 import styled from 'styled-components';
@@ -10,8 +11,10 @@ const StyledGame = styled.div`
     bottom: 5px;
 `
 
-const Game = () => {
+const Game = (props) => {
+    const { endpoint } = props;
     const [ score, setScore ] = useState(10);
+    const navigate = useNavigate();
 
     const scoreChangeHandler = (action, value) => {
         switch(action) {
@@ -34,13 +37,26 @@ const Game = () => {
         }
     }
 
+    const mounted = useRef();
     useEffect(() => {
         if (score < 10) {
             setScore(10);
         } else if (score > 500) {
             setScore(500);
         }
-    }, [score])
+        if (!mounted.current) {
+            // do componentDidMount
+            if (!endpoint) {
+                navigate("/game/expired");
+            }
+            mounted.current = true;
+        } else {
+            // do componentDidUpdate
+        }
+        return () => {
+            // do componentWillUnmount
+        }
+    }, [score, endpoint, navigate])
 
     return (
         <StyledGame>
