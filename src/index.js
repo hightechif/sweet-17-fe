@@ -10,7 +10,6 @@ const StyledTheme = styled.div`
 	height: 640px;
 	background-image: url('./images/background.png');
 	margin: 0 auto;
-	padding: 0;
 `
 
 ReactDOM.render(

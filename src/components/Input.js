@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const StyledInput = styled.input`
-    margin: 5px 16px;
+    margin: 10px 16px;
+    border-radius: 10px;
 `
 
 const Input = (props) => {

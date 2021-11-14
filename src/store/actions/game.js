@@ -1,12 +1,19 @@
-import axios from "axios"
+import axios from "axios";
 
-const register = async (phone) => {
+const register = async (username, phoneNumber) => {
     const service = await axios({
-        method: 'GET',
-        baseURL: 'https://fadhil-auth.herokuapp.com',
-        url: '/api/v1',
+        method: 'POST',
+        baseURL: 'https://sweet-17-be.herokuapp.com',
+        url: '/user/create',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization, X-Request-With'
+        },
+        data: {
+            'username': username,
+            'phoneNumber': phoneNumber
         }
     })
     return service;

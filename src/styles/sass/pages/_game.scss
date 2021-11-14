@@ -1,0 +1,20 @@
+.game-controller {
+    position: absolute;
+    top: 550px;
+    display: flex;
+    button {
+        margin: 0 0;
+        padding: 0 0;
+        width: 120px;
+    }
+    p {
+        width: calc(360px - 240px);
+        margin-top: 13px;
+        padding-top: 15px;
+        text-align: center;
+        background: linear-gradient(to left, #FFD643, #F19B36);
+        border-radius: 16px;
+        height: 56px;
+        color: white;
+    }
+}

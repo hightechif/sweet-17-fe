@@ -1,3 +1,22 @@
-
+.game-controller {
+  position: absolute;
+  top: 550px;
+  display: flex;
+}
+.game-controller button {
+  margin: 0 0;
+  padding: 0 0;
+  width: 120px;
+}
+.game-controller p {
+  width: 120px;
+  margin-top: 13px;
+  padding-top: 15px;
+  text-align: center;
+  background: linear-gradient(to left, #FFD643, #F19B36);
+  border-radius: 16px;
+  height: 56px;
+  color: white;
+}
 
 /*# sourceMappingURL=Main.css.map */

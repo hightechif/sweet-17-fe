@@ -1,9 +1,18 @@
 import { useState, useEffect } from 'react';
 import store from '../store';
 import { useNavigate } from 'react-router';
+import styled from 'styled-components';
+
+const StyledHome = styled.div`
+    justify-content: center;
+    align-items: center;
+    img {
+        padding-top: 60%;
+    }
+`
 
 const Home = () => {
-    const [qrCode, setQrCode] = useState("");
+    const [ qrCode, setQrCode ] = useState("");
     const navigate = useNavigate();
 
     const onLoadQRCode = async (param = null) => {
@@ -17,16 +26,13 @@ const Home = () => {
 
     useEffect(() => {
         onLoadQRCode();
-        setInterval(() => 
-            navigate('/register'), 
-            2000
-        )
-    }, [navigate])
+        setTimeout(() => navigate('/register'), 2000);
+    }, [qrCode, navigate])
 
-    console.log(qrCode);
     return (
-        <div>
-        </div>
+        <StyledHome>
+            <img src="./images/logo.png" alt="logo" />
+        </StyledHome>
     )
 }
 
