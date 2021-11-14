@@ -6,21 +6,31 @@ import store from '../store';
 
 const StyledDiv = styled.div`
     padding: 0 5%;
+    padding: 152px 40px;
+    box-sizing: border-box;
     h1 {
-        margin-bottom: 10px;
+        margin-top: 40px;
+        margin-bottom: 24px;
+        text-align: center;
+        font-weight: 600px;
+        font-size: 18px;
     }
     .form__container {
-        margin: 152px 40px;
-        /* padding: 152px 40px;
-        box-sizing: border-box; */
+        border-radius: 20px;
+        padding: 10px 10px;
         background: #FFFFFF;
+    }
+    p {
+        color: #909090;
+        font-size: 10px;
     }
 `
 
-const Register = () => {
+const Register = (props) => {
+    const { endpoint } = props;
     const [ userDTO, setUserDTO ] = useState({
-        "phone": "",
-        "password": ""
+        "name": "",
+        "phone": ""
     });
     const [ isRegisterSuccess, setIsRegisterSuccess ] = useState(true);
     const [ isSubmit, setIsSubmit ] = useState(false);
@@ -33,36 +43,35 @@ const Register = () => {
     }
 
     const handleSubmit = async (event, error) => {
-        setIsSubmit(true);
         event.preventDefault();
+        setIsSubmit(true);
         try {
-            if (userDTO.phone === "" || userDTO.password === "") {
-                setErrorMessage("Phone or password can't be empty");
+            if (userDTO.name === "" || userDTO.phone === "") {
+                setErrorMessage("Name or phone can't be empty");
                 throw(error);
             }
             setErrorMessage("Phone already exist");
-            const postRegister = await store.actions.game.register(userDTO.phone, userDTO.password);
+            const postRegister = await store.actions.game.register(userDTO.name, userDTO.phone);
             const { data } = postRegister;
             setIsRegisterSuccess(!!data);
+            navigate(`/game/${endpoint}`);
         } catch (error) {
             setIsRegisterSuccess(false);
         }
     }
 
     useEffect(() => {
-        const getToken = window.localStorage.getItem("ACCESS_TOKEN") ?? null;
-        if (getToken) {
-            navigate("/");
-        }
+        
         return () =>{
             // do componentWillUnmount
         }
     })
 
+    console.log(endpoint);
     return (
         <StyledDiv>
             <div className="form__container">
-                <h1 className="uppercase font-bold text-gray-700">Register Page</h1>
+                <h1 className="font-bold text-gray-700">Daftar Sebentar, yuk!</h1>
                 <Form biodata={userDTO} handleChange={handleChange} handleSubmit={handleSubmit} isRegistered={false} isRegisterSuccess={isRegisterSuccess} isSubmit={isSubmit} errorMessage={errorMessage} />
             </div>
         </StyledDiv>

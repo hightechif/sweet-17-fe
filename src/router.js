@@ -12,7 +12,7 @@ const router = (props) => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<Register endpoint={endpoint} />} />
                 <Route path="/game" >
                     <Route path={`${endpoint}`} element={<Game endpoint={endpoint} />} />
                     <Route path="" element={<ExpiredQR />} />

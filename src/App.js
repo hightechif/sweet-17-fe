@@ -18,7 +18,7 @@ function App() {
 			setEndpoint(endpoint);
 			setEndpoint("2zf7HjZko"); // example
 		} catch (error) {
-			setEndpoint(null)
+			setEndpoint(null);
 		}
 	}
 

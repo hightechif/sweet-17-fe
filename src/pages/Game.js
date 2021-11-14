@@ -46,9 +46,9 @@ const Game = (props) => {
         }
         if (!mounted.current) {
             // do componentDidMount
-            if (!endpoint) {
-                navigate("/game/expired");
-            }
+            // if (!endpoint) {
+            //     navigate("/game/expired");
+            // }
             mounted.current = true;
         } else {
             // do componentDidUpdate
@@ -58,6 +58,7 @@ const Game = (props) => {
         }
     }, [score, endpoint, navigate])
 
+    console.log(endpoint);
     return (
         <StyledGame>
             <p>Score: {score}</p>
