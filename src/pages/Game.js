@@ -10,14 +10,14 @@ const StyledGame = styled.div`
     #catcher {
         position: relative;
         margin: 0 auto;
-        top: 450px;
+        top: 420px;
         left: ${(props) => `${props.position}px`};
         z-index: 10;
     }
     .arena {
         img {
             transform: scale(0.5);
-            position: fixed;
+            position: relative;
             top: ${(props) => `${props.maju}px`};
             left: ${(props) => `${props.random*10}px`};
             z-index: 100;
