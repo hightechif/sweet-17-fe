@@ -26,7 +26,7 @@ const Home = () => {
 
     useEffect(() => {
         onLoadQRCode();
-        setTimeout(() => navigate('/register'), 2000);
+        setTimeout(() => navigate('/register'), 4000);
     }, [qrCode, navigate])
 
     return (
