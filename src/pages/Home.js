@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import store from '../store';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
-    const [ qrCode, setQrCode ] = useState("");
+    const [qrCode, setQrCode] = useState("");
+    const navigate = useNavigate();
 
     const onLoadQRCode = async (param = null) => {
         try {
@@ -15,12 +17,15 @@ const Home = () => {
 
     useEffect(() => {
         onLoadQRCode();
-    }, [])
+        setInterval(() => 
+            navigate('/register'), 
+            2000
+        )
+    }, [navigate])
 
     console.log(qrCode);
     return (
         <div>
-            HOME
         </div>
     )
 }

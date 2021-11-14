@@ -5,16 +5,15 @@ import Form from '../components/Form';
 import store from '../store';
 
 const StyledDiv = styled.div`
-    margin-top: 50px;
-    margin-bottom: 50px;
     padding: 0 5%;
     h1 {
         margin-bottom: 10px;
     }
     .form__container {
-        margin: 0 auto;
-        padding: 20px 30%;
-        box-sizing: border-box;
+        margin: 152px 40px;
+        /* padding: 152px 40px;
+        box-sizing: border-box; */
+        background: #FFFFFF;
     }
 `
 

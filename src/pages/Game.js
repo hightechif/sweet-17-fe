@@ -4,7 +4,8 @@ import store from '../store';
 import styled from 'styled-components';
 
 const StyledGame = styled.div`
-    position: absolute;
+    background-image: url('./images/background.png');
+    margin: 0 auto;
     left: 5px;
     right: 5px;
     bottom: 5px;
