@@ -7,19 +7,23 @@ const StyledGame = styled.div`
     background-image: url('./images/game-bg.png');
     width: 360px;
     height: 640px;
+    position: relative;
     #catcher {
-        position: relative;
+        position: absolute;
+        width: 47px;
         margin: 0 auto;
-        top: 420px;
-        left: ${(props) => `${props.position}px`};
+        top: 490px;
+        left: ${(props) => `${props.tubePositionX}px`};
         z-index: 10;
     }
     .arena {
-        img {
-            transform: scale(0.5);
-            position: relative;
-            top: ${(props) => `${props.maju}px`};
-            left: ${(props) => `${props.random*10}px`};
+        .ball {
+            width: 47px;
+            position: absolute;
+            padding: 10px 10px;
+            box-sizing: border-box;
+            top: ${(props) => `${props.ballPositionY}px`};
+            left: ${(props) => `${props.ballPositionX}px`};
             z-index: 100;
         }
     }
@@ -27,9 +31,9 @@ const StyledGame = styled.div`
 
 const Game = (props) => {
     const [ score, setScore ] = useState(10);
-    const [ position, setPosition ] = useState(0);
-    const [ randomNumber, setRandomNumber ] = useState(30);
-    const [ maju, setMaju ] = useState(0);
+    const [ tubePositionX, setTubePositionX ] = useState(150);
+    const [ ballPositionX, setBallPositionX ] = useState(150);
+    const [ ballPositionY, setBallPositionY ] = useState(0);
     const [ ball, setBall ] = useState("yellow");
 
     const ballType = {
@@ -48,21 +52,28 @@ const Game = (props) => {
     }
 
     const handleLeftButton = () => {
-        setPosition(position - 10);
+        setTubePositionX(tubePositionX - (360/12));
     }
 
     const handleRightButton = () => {
-        setPosition(position + 10);
+        setTubePositionX(tubePositionX + (360/12));
     }
 
-    const scoreChangeHandler = (action, value) => {
-        switch(action) {
-            case "increase":
-                return setScore(score + value);
-            case "decrease":
-                return setScore(score - value);
-            default:
-                break;
+    const scoreChangeHandler = (tubePositionX, ballPositionX, ballPositionY) => {
+        if (ballPositionY >= 470 && ballPositionX === tubePositionX) {
+            switch (ball) {
+                case "purple":
+                    setScore(score+50);
+                    break;
+                case "yellow":
+                    setScore(score+10);
+                    break;
+                case "black":
+                    setScore(score-20);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -76,13 +87,13 @@ const Game = (props) => {
         }
     }
 
-    const ballGenerator = (maju) => {
-        if (maju > 470) {
-            setMaju(0);
+    const ballGenerator = (ballPositionY) => {
+        if (ballPositionY > 470) {
+            setBallPositionY(0);
             setBall(ballType[randomGenerator(0, 7)]);
-            setRandomNumber(randomGenerator(2, 30));
+            setBallPositionX((Math.floor(360/12))*randomGenerator(0, 10));
         } else {
-            setTimeout(() => setMaju(maju+20), 400);
+            setTimeout(() => setBallPositionY(ballPositionY+20), 100);
         }
     }
 
@@ -90,35 +101,33 @@ const Game = (props) => {
         if (score < 10) {
             setScore(10);
         } else if (score > 500) {
-            setScore(500);
+            setScore(1000);
         }
     }
 
-    const catcherPosisitonInterlock = (position) => {
-        if (position < -140) {
-            setPosition(-140);
-        } else if (position > 150) {
-            setPosition(150);
+    const catcherPosisitonInterlock = (tubePositionX) => {
+        if (tubePositionX < 0) {
+            setTubePositionX(0);
+        } else if (tubePositionX > 300) {
+            setTubePositionX(300);
         }
     }
 
     useEffect(() => {
         scoreValueInterlock(score);
-        catcherPosisitonInterlock(position);
-        ballGenerator(maju);
-    }, [score, position, randomNumber, maju])
+        catcherPosisitonInterlock(tubePositionX);
+        ballGenerator(ballPositionY);
+        scoreChangeHandler(tubePositionX, ballPositionX, ballPositionY)
+    }, [score, tubePositionX, ballPositionX, ballPositionY])
 
+    console.log(ballPositionX, tubePositionX);
     return (
-        <StyledGame position={position} random={randomNumber} maju={maju}>
+        <StyledGame tubePositionX={tubePositionX} ballPositionX={ballPositionX} ballPositionY={ballPositionY}>
             <div className="arena">
-                <img src={`./images/ball_${ball}.png`} alt={`${ball} ball`} />
+                <div className="ball">
+                    <img src={`./images/ball_${ball}.png`} alt={`${ball} ball`} />
+                </div>
             </div>
-            <button onClick={() => scoreChangeHandler("increase", 50)}>
-            </button>
-            <button onClick={() => scoreChangeHandler("increase", 10)}>
-            </button>
-            <button onClick={() => scoreChangeHandler("decrease", 20)}>
-            </button>
             <img id="catcher" src="./images/tube_catcher.png" alt="black ball" />
             <div className="game-controller">
                 <button onClick={handleLeftButton}>
